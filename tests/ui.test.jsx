@@ -61,6 +61,16 @@ describe('TeamRescue main interactions',()=>{
     start();expect(screen.getByText('7 tasks. One step closer to done.')).toBeTruthy();
     expect(screen.getAllByText('Saved semester project').length).toBeGreaterThan(0);
   });
+  it('resets a custom recovered team to the demo without rendering stale owners',async()=>{
+    const p=sampleProject();p.members[0].available=false;
+    p.members.push({id:'analytics-specialist',name:'Taylor Chen',role:'Analytics specialist',skills:['data visualization'],hours:4,available:true,color:'blue'});
+    localStorage.setItem('teamrescue.v1',JSON.stringify({project:p,hasPlan:true}));
+    const user=start();expect(screen.getByText('8 tasks. One step closer to done.')).toBeTruthy();
+    await user.click(screen.getByRole('button',{name:/Try a demo scenario/}));
+    expect(await screen.findByText('7 tasks. One step closer to done.')).toBeTruthy();
+    expect(screen.queryByRole('switch',{name:'Taylor Chen availability'})).toBeNull();
+    expect(JSON.parse(localStorage.getItem('teamrescue.v1')).project.members.length).toBe(4);
+  });
   it('recovers safely from corrupted browser storage',()=>{
     localStorage.setItem('teamrescue.v1','{corrupt');start();expect(screen.getByRole('heading',{name:'Project recovery'})).toBeTruthy();
     expect(JSON.parse(localStorage.getItem('teamrescue.v1')).project.tasks.length).toBe(8);

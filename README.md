@@ -4,7 +4,7 @@ A frontend-only group-project recovery simulator for college students. Built wit
 
 ## Run locally
 
-Install Node.js **22.12+** (Node 24 LTS recommended) and npm, then open a terminal in this directory:
+Install Node.js **24 LTS** and npm, then open a terminal in this directory. The project pins Node 24 so Vercel uses the same major version:
 
 ```sh
 npm install
@@ -47,7 +47,7 @@ The pure calculation module is `src/engine.js`; UI and browser persistence live 
 
 ### Verification limits
 
-The production build and automated logic/DOM tests are run locally. The Vite development server starts successfully. Native browser automation was stopped by the environment because it could not determine the browser URL confidently, and loopback preview requests timed out. Consequently, rendered desktop/mobile layout, map zoom/pan, and the final browser print-preview layout have not been visually verified. The print button invocation and report contents are covered by DOM tests.
+The production build and 27 automated logic/DOM tests run locally. The Vite development server starts successfully, and the built HTML, JavaScript, and CSS return HTTP 200 in a local preview. The Vercel deployment is tested in a browser for the demo, recovered and blocked tasks, original/recovery comparison, teammate creation, dependent task creation, search, and persistence after reload. Desktop and mobile layouts are inspected. The final browser print-preview layout has not been visually verified; the print action and report contents are covered by DOM tests. A regression test covers resetting a custom recovered team to the demo without rendering stale teammate references.
 
 ## Deploy to Vercel with source on GitHub
 
