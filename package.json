@@ -1,0 +1,33 @@
+{
+  "name": "teamrescue",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "npm run test:logic && npm run test:ui",
+    "test:logic": "node --test tests/engine.test.js",
+    "test:ui": "vitest run"
+  },
+  "dependencies": {
+    "@xyflow/react": "^12.9.0",
+    "lucide-react": "^0.468.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.0",
+    "@testing-library/react": "^16.3.3",
+    "@testing-library/user-event": "^14.6.9",
+    "@vitejs/plugin-react": "^4.5.0",
+    "jsdom": "^26.1.0",
+    "tailwindcss": "^4.1.0",
+    "vite": "^6.3.0",
+    "vitest": "^5.1.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}
